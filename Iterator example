@@ -1,0 +1,11 @@
+TrueStack<String> stack = new LinedStack<String>();
+
+i = stack.iterator();
+
+while (i.hasNext()){
+    String element = i.next()
+    // process element
+}
+
+for (String element : stack)
+    # process element
