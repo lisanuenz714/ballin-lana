@@ -1,0 +1,26 @@
+   // Loop inserting each new node in lexicographic order.
+   static node loop_insert_lexicographic () {
+      node head = null;
+      while (stdin.hasNext ()) {
+         String word = stdin.next ();
+         node prev = null;
+         node curr = head;
+         int cmp = 1;
+         // Phase 1 - find insertion point. -- O(n)
+         while (curr != null) {
+            cmp = curr.value.compareTo (word);
+            if (cmp >= 0) break;
+            prev = curr;
+            curr = curr.link;
+         }
+         // Phase 2 - insert if not already there. -- O(1)
+         if (cmp != 0) {
+            node tmp = new node ();
+            tmp.value = word;
+            tmp.link = curr;
+            if (prev == null) head = tmp;
+                         else prev.link = tmp;
+         }
+      }
+      return head;
+   }
