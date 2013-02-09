@@ -1,0 +1,35 @@
+
+clear
+%
+a=0; b=2;
+N=256;
+hs=4/N;
+s=[0:hs/2:4];
+nc=length(s);
+h=(b-a)/N;
+x=a+[0:N]*h;
+x2=a+[0:N-1]*h+h/2;
+T=zeros(1,nc);
+t=[0:hs:4];
+nct=length(t);
+Gt=zeros(1,nct);
+%
+for i=1:nc,
+y=(sqrt(1+exp(-3*cos(s(i)*x)))-1.5);
+y2=(sqrt(1+exp(-3*cos(s(i)*x2)))-1.5);
+T(i)=(y(1)+y(N+1)+2*sum(y(2:N))+4*sum(y2))*h/6;
+%
+end
+for j=2:nct,
+n0=2*(j-1);
+w=T(1:2:n0+1);
+w2=T(2:2:n0);
+lgt=length(w);
+N=lgt-1;
+Gt(j)=(w(1)+w(N+1)+2*sum(w(2:N))+4*sum(w2))*hs/6;
+end
+plot(t,Gt,'r')
+Title('Simpsons approximation of G(t)')
+xlabel('t')
+ylabel('G(t)')
+legend('G(t)')
